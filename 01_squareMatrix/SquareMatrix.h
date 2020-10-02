@@ -6,6 +6,9 @@ private:
     T** _arry;
     size_t _size;
 
+    void clear ();
+    void make (const size_t SIZE);
+
 public: 
 
     SquareMatrix();
