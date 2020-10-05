@@ -15,21 +15,22 @@ public:
     SquareMatrix(size_t SIZE);
 
     // big 5
-    ~SquareMatrix();
-    SquareMatrix(const SquareMatrix& target);
-    SquareMatrix(SquareMatrix&& target);
-    SquareMatrix& operator=(const SquareMatrix& rhs);
-    SquareMatrix& operator=(const SquareMatrix&& rhs);
+    ~SquareMatrix(); // destructor 
+    SquareMatrix(const SquareMatrix& target); // copy constructor 
+    SquareMatrix(SquareMatrix&& target); // move constructor 
+    SquareMatrix& operator=(const SquareMatrix& rhs); // copy operator 
+    SquareMatrix& operator=(SquareMatrix&& rhs); // move operator 
     
     bool operator==(const SquareMatrix& rhs);
+    bool operator!=(const SquareMatrix& rhs);
     SquareMatrix& operator+(const SquareMatrix&& rhs);
     
     T& at(int row, int col);
 
-    size_t size();
+    size_t size() const;
     void resize(size_t new_size);
 
-    void print();
+    void print() const;
 };
 
 #include "SquareMatrix.hxx"
