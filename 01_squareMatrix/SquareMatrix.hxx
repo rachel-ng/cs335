@@ -46,7 +46,6 @@ void SquareMatrix<T>::clear() {
         for (int i = 0; i < _size; i++) {
             delete[] _arry[i];
         }
-        
         delete[] _arry;
 
         _arry = nullptr;
@@ -56,10 +55,7 @@ void SquareMatrix<T>::clear() {
 
 template <typename T>
 SquareMatrix<T>::~SquareMatrix() {
-    for (int i = 0; i < _size; i++) {
-        delete[] _arry[i];
-    }
-    delete[] _arry;
+    clear();
 }
 
 
@@ -71,6 +67,7 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix& rhs) {
     if (this == &rhs) {
         return *this;
     }
+
     if (_arry != nullptr) {
         clear();
     }
@@ -102,7 +99,6 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(SquareMatrix&& rhs) {
     _arry = rhs._arry;
     _size = rhs._size; 
 
-
     rhs._arry = nullptr;
     rhs._size = 0;
     
@@ -115,6 +111,7 @@ bool SquareMatrix<T>::operator==(const SquareMatrix& rhs) {
     if (_size != rhs._size) {
         return false;
     }
+
     for (int r = 0; r < _size; r++) {
         for (int c = 0; c < _size; c++) {
             if (this->_arry[r][c] != rhs._arry[r][c]) {
@@ -131,6 +128,7 @@ bool SquareMatrix<T>::operator!=(const SquareMatrix& rhs) {
     if (_size != rhs._size) {
         return true;
     }
+
     for (int r = 0; r < _size; r++) {
         for (int c = 0; c < _size; c++) {
             if (this->_arry[r][c] != rhs._arry[r][c]) {
@@ -154,6 +152,7 @@ SquareMatrix<T> SquareMatrix<T>::operator+(const SquareMatrix& rhs) {
             out._arry[r][c] = _arry[r][c] + rhs._arry[r][c];
         }
     }
+
     return out;
 }
 
