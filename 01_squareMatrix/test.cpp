@@ -1,6 +1,12 @@
 #include<iostream>
 #include"SquareMatrix.h"
 
+/*
+
+g++ -std=c++11 -Wall -g -fsanitize=address test.cpp -o test
+
+*/
+
 using namespace std;
 
 void Test1()
@@ -241,3 +247,10 @@ int main()
 
    return 0;
 }
+
+/*
+
+g++ -std=c++11 -Wall -g -fsanitize=address test.cpp -o test
+
+*/
+
