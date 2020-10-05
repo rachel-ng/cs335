@@ -40,6 +40,13 @@ TEST_CASE("== / !="){
 
     c = a != s;
     CHECK(c);
+    
+    SquareMatrix<int> j;
+    c = a == j;
+    CHECK(!c);
+
+    c = a != j;
+    CHECK(c);
 
     for (int r = 0; r < 10; r++) {
         for (int c = 0; c < 10; c++) {
