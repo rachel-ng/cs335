@@ -28,6 +28,7 @@ int main() {
     std::cout << std::endl;
     s.at(2,1) = 12341234;
     s.print(); 
+
     std::cout << s.at(2,1) << std::endl;
     try {
         std::cout << s.at(6,1) << std::endl;
@@ -44,8 +45,28 @@ int main() {
         std::cout << "haha bitch at(5,1) is invalid" << std::endl;
     }
 
+    SquareMatrix<int> a = s;
+    a.at(0,0) = 1;
+
+    a.print();
+    s.print();
+    
+    a + s;
+
+    std::cout << "addition" << std::endl;
+
+    SquareMatrix<int> d = a + s;
+    std::cout << "made d" << std::endl;
+    d.print();
+
     s.resize(6); 
     s.print(); 
+    
+    std::cout << "change d" << std::endl;
+    d = a + s;
+    std::cout << "change d" << std::endl;
+    d.print();
+    
     return 0;
 }
 

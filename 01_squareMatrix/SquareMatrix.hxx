@@ -42,9 +42,6 @@ SquareMatrix<T>::SquareMatrix(SquareMatrix&& rhs): _size(rhs._size), _arry(rhs._
 
 template <typename T>
 SquareMatrix<T>::~SquareMatrix() {
-
-    std::cout << "big 5 destructor" << std::endl;
-
     for (int i = 0; i < _size; i++) {
         delete[] _arry[i];
     }
@@ -72,6 +69,7 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix& rhs) {
             _arry[r][c] = rhs._arry[r][c];
         }
     }
+
     _size = new_size;
 
     return *this;
@@ -90,7 +88,9 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(SquareMatrix&& rhs) {
     _arry = rhs._arry;
     _size = rhs._size; 
 
+
     rhs._arry = nullptr;
+    rhs._size = 0;
     
     return *this;
 }
@@ -129,11 +129,26 @@ bool SquareMatrix<T>::operator!=(const SquareMatrix& rhs) {
 
 
 template <typename T>
+SquareMatrix<T> SquareMatrix<T>::operator+(const SquareMatrix<T>& rhs) {
+    if (_size != rhs._size) {
+        throw std::invalid_argument("matrices are not the same size");
+    }
+
+    SquareMatrix<T> out(_size);
+    for (int r = 0; r < _size; r++) {
+        for (int c = 0; c < _size; c++) { 
+            out._arry[r][c] = _arry[r][c] + rhs._arry[r][c];
+        }
+    }
+    return out;
+}
+
+template <typename T>
 T& SquareMatrix<T>::at(int row, int col) {
     if (row < _size && row > -1 && col < _size && col > -1) {
         return _arry[row][col];
     }
-    throw std::out_of_range("unable to retrieve items at specified row and column");  
+    throw std::out_of_range("invalid row and / or column");  
 }
 
 
@@ -152,28 +167,6 @@ void SquareMatrix<T>::clear() {
 
 
 template <typename T>
-void SquareMatrix<T>::make(const size_t SIZE) {
-    if (_arry != nullptr) {
-        clear();
-    }
-    
-    if (SIZE == 0) { // strange but ok
-        _size = SIZE;
-        return;
-    }
-
-    _arry = new T*[SIZE];
-    for (int r = 0; r < SIZE; r++) {
-        _arry[r] = new T[SIZE];
-        for (int c = 0; c < SIZE; c++) { 
-            _arry[r][c] = 0;
-        }
-    }
-    _size = SIZE;
-}
-
-
-template <typename T>
 size_t SquareMatrix<T>::size() const {
     return _size;
 }
@@ -182,7 +175,20 @@ size_t SquareMatrix<T>::size() const {
 template <typename T>
 void SquareMatrix<T>::resize(const size_t new_size) {
     clear();
-    make(new_size);
+
+    _size = new_size;
+
+    if (new_size == 0) { // strange but ok
+        return;
+    }
+
+    _arry = new T*[new_size];
+    for (int r = 0; r < new_size; r++) {
+        _arry[r] = new T[new_size];
+        for (int c = 0; c < new_size; c++) { 
+            _arry[r][c] = 0;
+        }
+    }
 }
 
 

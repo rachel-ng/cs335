@@ -7,7 +7,6 @@ private:
     size_t _size;
 
     void clear ();
-    void make (const size_t SIZE);
 
 public: 
 
@@ -23,11 +22,12 @@ public:
     
     bool operator==(const SquareMatrix& rhs);
     bool operator!=(const SquareMatrix& rhs);
-    SquareMatrix& operator+(const SquareMatrix&& rhs);
+    SquareMatrix<T> operator+(const SquareMatrix<T>& rhs);
     
     T& at(int row, int col);
 
     size_t size() const;
+
     void resize(size_t new_size);
 
     void print() const;

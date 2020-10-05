@@ -51,10 +51,12 @@ TEST_CASE("resize"){
 TEST_CASE("at(r,c)"){
     std::cout << "\ntesting at(r,c)\n" << std::endl;
 
-    s.at(1,3) = 5;
-    s.at(2,1) = 100;
-    s.at(3,4) = 87;
-    
+    for (int r = 0; r < 5; r++) {
+        for (int c = 0; c < 5; c++) {
+            s.at(r,c) = r*10 + c;
+        }
+    }
+
     s.print();
     m.print();
     a.print();
@@ -92,6 +94,7 @@ TEST_CASE("at(r,c)"){
 
 TEST_CASE("big 5"){
     std::cout << "\ntesting big 5\n" << std::endl;
+
     // copy operator 
     a = s;
     a.print();
@@ -100,6 +103,7 @@ TEST_CASE("big 5"){
     bool c = a == s;
     CHECK(c);
 
+
     // copy constructor  
     SquareMatrix<int> b = a;
     a.print();
@@ -107,17 +111,74 @@ TEST_CASE("big 5"){
 
     c = a == b;
     CHECK(c);
+    
 
     // move operator 
+    b = a + s;
+    b.print();
+
+    c = b == a + s ;
+    CHECK(c);
+
 
     // move constructor 
+    SquareMatrix<int> d = a + s;
+    d.print();
 
+    c = d == a + s ;
+    CHECK(c);
 }
 
 
 
+TEST_CASE("+"){
+    std::cout << "\ntesting + operator\n" << std::endl;
+    
+    SquareMatrix<int> d = a + s;
+
+    a.print();
+    s.print();
+    d.print();
+
+    for (int r = 0; r < 5; r++) {
+        for (int c = 0; c < 5; c++) {
+            CHECK(d.at(r,c) == a.at(r,c) + s.at(r,c));
+        }
+    }
+
+    bool c = d == a + s ;
+    CHECK(c);
+}
 
 
+TEST_CASE("mentioned"){
+    std::cout << "\ntesting stuff mentioned in spec\n" << std::endl;
+    SquareMatrix<int> b;
+    std::cout << "b" << std::endl;
+    b.print();
+    b = a + s;
+    std::cout << "b" << std::endl;
+    b.print();
+    SquareMatrix<int> d = b + b;
+    std::cout << "d" << std::endl;
+    d.print();
+
+    std::cout << "a = a" << std::endl;
+    a = a;
+    std::cout << "a" << std::endl;
+    a.print();
+
+    std::cout << "a = b = d" << std::endl;
+    a = b = d;
+    std::cout << "a" << std::endl;
+    a.print();
+    std::cout << "b" << std::endl;
+    b.print();
+    std::cout << "d" << std::endl;
+    d.print();
+
+    CHECK(true);
+}
 
 
 
@@ -136,3 +197,4 @@ TEST_CASE(""){
     CHECK(errCaught);
 }
 */
+
