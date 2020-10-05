@@ -41,6 +41,20 @@ SquareMatrix<T>::SquareMatrix(SquareMatrix&& target): _size(target._size), _arry
 
 
 template <typename T>
+void SquareMatrix<T>::clear() {
+    if (_arry != nullptr) {
+        for (int i = 0; i < _size; i++) {
+            delete[] _arry[i];
+        }
+        
+        delete[] _arry;
+
+        _arry = nullptr;
+    }
+}
+
+
+template <typename T>
 SquareMatrix<T>::~SquareMatrix() {
     for (int i = 0; i < _size; i++) {
         delete[] _arry[i];
@@ -153,26 +167,6 @@ T& SquareMatrix<T>::at(int row, int col) {
 
 
 template <typename T>
-void SquareMatrix<T>::clear() {
-    if (_arry != nullptr) {
-        for (int i = 0; i < _size; i++) {
-            delete[] _arry[i];
-        }
-        
-        delete[] _arry;
-
-        _arry = nullptr;
-    }
-}
-
-
-template <typename T>
-size_t SquareMatrix<T>::size() const {
-    return _size;
-}
-
-
-template <typename T>
 void SquareMatrix<T>::resize(const size_t new_size) {
     clear();
 
@@ -189,6 +183,12 @@ void SquareMatrix<T>::resize(const size_t new_size) {
             _arry[r][c] = 0;
         }
     }
+}
+
+
+template <typename T>
+size_t SquareMatrix<T>::size() const {
+    return _size;
 }
 
 

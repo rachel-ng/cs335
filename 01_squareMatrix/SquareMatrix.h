@@ -25,11 +25,9 @@ public:
     SquareMatrix<T> operator+(const SquareMatrix& rhs);
     
     T& at(int row, int col);
-
-    size_t size() const;
-
     void resize(size_t new_size);
 
+    size_t size() const;
     void print() const;
 };
 
