@@ -22,7 +22,7 @@ public:
     
     bool operator==(const SquareMatrix& rhs);
     bool operator!=(const SquareMatrix& rhs);
-    SquareMatrix<T> operator+(const SquareMatrix<T>& rhs);
+    SquareMatrix<T> operator+(const SquareMatrix& rhs);
     
     T& at(int row, int col);
 

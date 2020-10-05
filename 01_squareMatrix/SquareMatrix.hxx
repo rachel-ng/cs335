@@ -17,7 +17,7 @@ SquareMatrix<T>::SquareMatrix(size_t SIZE): _size(SIZE) {
 
 
 template <typename T>
-SquareMatrix<T>::SquareMatrix(const SquareMatrix& rhs): _size(rhs._size) {
+SquareMatrix<T>::SquareMatrix(const SquareMatrix& target): _size(target._size) {
     
     std::cout << "big 5 copy" << std::endl;
 
@@ -25,18 +25,18 @@ SquareMatrix<T>::SquareMatrix(const SquareMatrix& rhs): _size(rhs._size) {
     for (int r = 0; r < _size; r++) {
         _arry[r] = new T[_size];
         for (int c = 0; c < _size; c++) { 
-            _arry[r][c] = rhs._arry[r][c];
+            _arry[r][c] = target._arry[r][c];
         }
     }
 }
 
 
 template <typename T>
-SquareMatrix<T>::SquareMatrix(SquareMatrix&& rhs): _size(rhs._size), _arry(rhs._arry) {
+SquareMatrix<T>::SquareMatrix(SquareMatrix&& target): _size(target._size), _arry(target._arry) {
     
     std::cout << "big 5 move" << std::endl;
     
-    rhs._arry = nullptr;
+    target._arry = nullptr;
 }
 
 
@@ -129,7 +129,7 @@ bool SquareMatrix<T>::operator!=(const SquareMatrix& rhs) {
 
 
 template <typename T>
-SquareMatrix<T> SquareMatrix<T>::operator+(const SquareMatrix<T>& rhs) {
+SquareMatrix<T> SquareMatrix<T>::operator+(const SquareMatrix& rhs) {
     if (_size != rhs._size) {
         throw std::invalid_argument("matrices are not the same size");
     }
@@ -202,9 +202,5 @@ void SquareMatrix<T>::print () const {
     }
     std::cout << std::endl;
 }
-
-
-
-
 
 
