@@ -32,7 +32,7 @@ SquareMatrix<T>::SquareMatrix(const SquareMatrix& rhs): _size(rhs._size) {
 
 
 template <typename T>
-SquareMatrix<T>::SquareMatrix(const SquareMatrix&& rhs): _size(rhs._size), _arry(rhs._arry) {
+SquareMatrix<T>::SquareMatrix(SquareMatrix&& rhs): _size(rhs._size), _arry(rhs._arry) {
     
     std::cout << "big 5 move" << std::endl;
     
@@ -79,7 +79,7 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix& rhs) {
 
 
 template <typename T>
-SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix&& rhs) {
+SquareMatrix<T>& SquareMatrix<T>::operator=(SquareMatrix&& rhs) {
 
     std::cout << "big 5 move operator" << std::endl;
 
