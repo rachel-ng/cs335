@@ -12,19 +12,19 @@ int main() {
     std::cout << "def\t" << def.size() << std::endl;
 
 
-    std::cout << (s == b ? "match" : "no match") << "\n" << std::endl;
+    std::cout << (s == b ? "match" : "no match") << "\n" << std::endl; // match
 
     for (int i = 0; i < 10; i++) {
         s.at(i,i) = 666;
     }
-    std::cout << (s == b ? "match" : "no match") << "\n" << std::endl;
+    std::cout << (s == b ? "match" : "no match") << "\n" << std::endl; // no match 
 
     b = s; 
     s.print(); 
     b.print(); 
 
-    std::cout << (s == b ? "match" : "no match") << "\n" << std::endl;
-    std::cout << (s != b ? "no match" : "match") << "\n" << std::endl;
+    std::cout << (s == b ? "match" : "no match") << "\n" << std::endl; // match 
+    std::cout << (s != b ? "no match" : "match") << "\n" << std::endl; // match 
 
     std::cout << "resize" << std::endl;
     s.print(); 

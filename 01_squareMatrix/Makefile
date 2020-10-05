@@ -1,4 +1,4 @@
-CXXFLAGS = -std=c++17
+CXXFLAGS = -std=c++11
 
 main: main.o SquareMatrix.o
 	g++ -o main main.o 
@@ -13,5 +13,5 @@ SquareMatrix.o: SquareMatrix.hxx SquareMatrix.h
 tests.o: tests.cpp SquareMatrix.h
 
 clean:
-	rm *.o 
+	rm *.o main tests 
 

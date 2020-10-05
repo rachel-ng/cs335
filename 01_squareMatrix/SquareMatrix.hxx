@@ -1,26 +1,24 @@
 #include "SquareMatrix.h"
 
+// default constructor 
 template <typename T>
 SquareMatrix<T>::SquareMatrix(): _size(0), _arry(nullptr){ }
 
-
 template <typename T>
 SquareMatrix<T>::SquareMatrix(size_t SIZE): _size(SIZE) {
+    if (SIZE < 0) {
+        throw std::invalid_argument("invalid size");
+    }
+
     _arry = new T*[SIZE];
-    for (int i = 0; i < _size; i++) {
-        _arry[i] = new T[_size];
-        for (int j = 0; j < _size; j++) { 
-            _arry[i][j] = 0;
-        }
+    for (int r = 0; r < SIZE; r++) {
+        _arry[r] = new T[SIZE];
     }
 }
 
-
+// big 5 copy constructor 
 template <typename T>
 SquareMatrix<T>::SquareMatrix(const SquareMatrix& target): _size(target._size) {
-    
-    std::cout << "big 5 copy" << std::endl;
-
     _arry = new T*[_size];
     for (int r = 0; r < _size; r++) {
         _arry[r] = new T[_size];
@@ -30,15 +28,11 @@ SquareMatrix<T>::SquareMatrix(const SquareMatrix& target): _size(target._size) {
     }
 }
 
-
+// big 5 move constructor 
 template <typename T>
 SquareMatrix<T>::SquareMatrix(SquareMatrix&& target): _size(target._size), _arry(target._arry) {
-    
-    std::cout << "big 5 move" << std::endl;
-    
     target._arry = nullptr;
 }
-
 
 template <typename T>
 void SquareMatrix<T>::clear() {
@@ -52,18 +46,15 @@ void SquareMatrix<T>::clear() {
     }
 }
 
-
+// big 5 destructor 
 template <typename T>
 SquareMatrix<T>::~SquareMatrix() {
     clear();
 }
 
-
+// big 5 copy operator 
 template <typename T>
 SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix& rhs) {
-
-    std::cout << "big 5 copy operator" << std::endl;
-
     if (this == &rhs) {
         return *this;
     }
@@ -86,12 +77,9 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix& rhs) {
     return *this;
 }
 
-
+// big 5 move operator  
 template <typename T>
 SquareMatrix<T>& SquareMatrix<T>::operator=(SquareMatrix&& rhs) {
-
-    std::cout << "big 5 move operator" << std::endl;
-
     if (_arry != nullptr) {
         clear();
     }
@@ -105,7 +93,7 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(SquareMatrix&& rhs) {
     return *this;
 }
 
-
+// overloaded == operator 
 template <typename T>
 bool SquareMatrix<T>::operator==(const SquareMatrix& rhs) {
     if (_size != rhs._size) {
@@ -119,10 +107,11 @@ bool SquareMatrix<T>::operator==(const SquareMatrix& rhs) {
             }
         }
     }
+
     return true;
 }
 
-
+// overloaded != operator 
 template <typename T>
 bool SquareMatrix<T>::operator!=(const SquareMatrix& rhs) {
     if (_size != rhs._size) {
@@ -136,10 +125,11 @@ bool SquareMatrix<T>::operator!=(const SquareMatrix& rhs) {
             }
         }
     }
+
     return false;
 }
 
-
+// overloaded + operator
 template <typename T>
 SquareMatrix<T> SquareMatrix<T>::operator+(const SquareMatrix& rhs) {
     if (_size != rhs._size) {
@@ -161,35 +151,30 @@ T& SquareMatrix<T>::at(int row, int col) {
     if (row < _size && row > -1 && col < _size && col > -1) {
         return _arry[row][col];
     }
+
     throw std::out_of_range("invalid row and / or column");  
 }
 
-
 template <typename T>
-void SquareMatrix<T>::resize(const size_t new_size) {
+void SquareMatrix<T>::resize(size_t new_size) {
     clear();
 
     _size = new_size;
 
-    if (new_size == 0) { // strange but ok
+    if (new_size == 0) { // strange but alright
         return;
     }
 
     _arry = new T*[new_size];
     for (int r = 0; r < new_size; r++) {
         _arry[r] = new T[new_size];
-        for (int c = 0; c < new_size; c++) { 
-            _arry[r][c] = 0;
-        }
     }
 }
-
 
 template <typename T>
 size_t SquareMatrix<T>::size() const {
     return _size;
 }
-
 
 template <typename T>
 void SquareMatrix<T>::print () const {
@@ -201,5 +186,7 @@ void SquareMatrix<T>::print () const {
     }
     std::cout << std::endl;
 }
+
+
 
 

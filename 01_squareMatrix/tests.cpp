@@ -8,22 +8,48 @@
 SquareMatrix<int> s(10);
 SquareMatrix<int> m(10);
 SquareMatrix<int> a;
+SquareMatrix<std::string> st(5);
+
+void fill (SquareMatrix<int>& m) {
+    int size = m.size();
+    for (int r = 0; r < size; r++) {
+        for (int c = 0; c < size; c++) {
+            m.at(r,c) = r*size + c;
+        }
+    }
+}
+
+void fill (SquareMatrix<std::string>& m, std::string s) {
+    int size = m.size();
+    for (int r = 0; r < size; r++) {
+        for (int c = 0; c < size; c++) {
+            m.at(r,c) = s;
+        }
+    }
+}
 
 TEST_CASE("size"){
     std::cout << "\ntesting size\n" << std::endl;
 
     CHECK(s.size() == 10);
+    fill(s);
     s.print();
 
     CHECK(m.size() == 10);
+    fill(m);
     m.print();
     
     CHECK(a.size() == 0);
     a.print();
 
     a.resize(1);
+    fill(a);
     CHECK(a.size() == 1);
     a.print();
+
+    CHECK(st.size() == 5);
+    fill(st,"h");
+    st.print();
 }
 
 TEST_CASE("== / !="){
@@ -48,12 +74,18 @@ TEST_CASE("== / !="){
     c = a != j;
     CHECK(c);
 
+    s.print();
+    m.print();
+
     for (int r = 0; r < 10; r++) {
         for (int c = 0; c < 10; c++) {
-            s.at(r,c) = r*10 + c;
+            s.at(r,c) = r*100 + c;
         }
     }
     
+    s.print();
+    m.print();
+
     c = s == m;
     CHECK(!c);
 
@@ -61,12 +93,35 @@ TEST_CASE("== / !="){
     CHECK(c);
 
     s.resize(10);
+    fill(s);
 
     c = s == m;
     CHECK(c);
 
     c = s != m;
     CHECK(!c);
+    
+    /* 
+    std::cout << "short matrix, prof" << std::endl;
+
+    SquareMatrix<short> shm(10);
+    SquareMatrix<short> sh(10);
+
+    shm.resize(2);
+    shm.print();
+
+    sh.resize(2);
+    sh.print();
+
+    c = sh == shm;
+    CHECK(c);
+
+    shm.at(0,0)=1;
+    shm.at(0,1)=1;
+    shm.at(1,0)=1;
+    shm.at(1,1)=1;
+    sh.print();
+    */
 }
 
 TEST_CASE("resize"){
@@ -79,6 +134,7 @@ TEST_CASE("resize"){
     s.print();
 
     s.resize(5);
+    fill(s);
     CHECK(s.size() == 5);
     s.print();
 
@@ -103,13 +159,18 @@ TEST_CASE("resize"){
 
     std::cout << "m.resize(6), m.resize(5)\n" << std::endl;
     m.resize(6);
+    fill(m);
     CHECK(m.size() == 6);
     c = s != m;
     CHECK(c);
 
     m.resize(5);
+    fill(m);
     CHECK(m.size() == 5);
     c = s == m;
+    s.print();
+    m.print();
+    std::cout << "ERROR" << std::endl;
     CHECK(c);
 
     // verify resize(0) works
@@ -118,6 +179,11 @@ TEST_CASE("resize"){
     a.resize(0);
     CHECK(a.size() == 0);
     a.print();
+
+    st.resize(4);
+    fill(st,"H");
+    CHECK(st.size() == 4);
+    st.print();
 }
 
 TEST_CASE("at(r,c)"){
@@ -265,6 +331,24 @@ TEST_CASE("+"){
 
     m.print();
     a.print();
+
+    SquareMatrix<std::string> ste (4);
+    fill(ste,"e");
+    SquareMatrix<std::string> stl (4);
+    fill(stl,"l");
+    SquareMatrix<std::string> sto (4);
+    fill(sto,"o");
+    SquareMatrix<std::string> stO (4);
+    fill(stO," ");
+    SquareMatrix<std::string> stW (4);
+    fill(stW,"W");
+    SquareMatrix<std::string> str (4);
+    fill(str,"r");
+    SquareMatrix<std::string> stD (4);
+    fill(stD,"d");
+
+    (st + ste + stl + stl + sto + stO + stW + sto + str + stl + stD).print();
+
 }
 
 
