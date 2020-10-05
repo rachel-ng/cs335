@@ -148,6 +148,26 @@ TEST_CASE("+"){
 
     bool c = d == a + s ;
     CHECK(c);
+
+
+    m.resize(8);
+    for (int r = 0; r < 5; r++) {
+        for (int c = 0; c < 5; c++) {
+            m.at(r,c) = r*10 + c;
+        }
+    }
+
+
+    bool errCaught = false;
+    try {
+        a + m;
+    } catch (const std::invalid_argument& e) {
+        std::cout << "invalid matrix given" << std::endl;
+        errCaught = true;
+    }
+    CHECK(errCaught);
+
+
 }
 
 
