@@ -100,28 +100,6 @@ TEST_CASE("== / !="){
 
     c = s != m;
     CHECK(!c);
-    
-    /* 
-    std::cout << "short matrix, prof" << std::endl;
-
-    SquareMatrix<short> shm(10);
-    SquareMatrix<short> sh(10);
-
-    shm.resize(2);
-    shm.print();
-
-    sh.resize(2);
-    sh.print();
-
-    c = sh == shm;
-    CHECK(c);
-
-    shm.at(0,0)=1;
-    shm.at(0,1)=1;
-    shm.at(1,0)=1;
-    shm.at(1,1)=1;
-    sh.print();
-    */
 }
 
 TEST_CASE("resize"){
@@ -267,6 +245,10 @@ TEST_CASE("big 5"){
     SquareMatrix<int> d = a + s;
     d.print();
 
+    std::cout << "d = std::move(d)" << std::endl;
+    d = std::move(d);
+    d.print();
+
     c = d == a + s ;
     CHECK(c);
 }
@@ -292,7 +274,7 @@ TEST_CASE("+"){
         }
     }
 
-    bool c = d == a + s ;
+    bool c = d == a + s;
     CHECK(c);
 
     std::cout << "d = d + a" << std::endl;
@@ -347,8 +329,8 @@ TEST_CASE("+"){
     SquareMatrix<std::string> stD (4);
     fill(stD,"d");
 
+    std::cout << "add matrices to get 'Hello World'" << std::endl;
     (st + ste + stl + stl + sto + stO + stW + sto + str + stl + stD).print();
-
 }
 
 
@@ -375,7 +357,7 @@ TEST_CASE("mentioned"){
     a.print();
 
 
-    std::cout << "a = b = c" << std::endl;
+    std::cout << "a = b = d" << std::endl;
     a = b = d;
     std::cout << "a" << std::endl;
     a.print();
@@ -389,6 +371,21 @@ TEST_CASE("mentioned"){
     c = a == b;
     CHECK(c);
     c = b == d;
+    CHECK(c);
+
+    
+    d = d + d;
+
+    std::cout << "a = b = std::move(d)" << std::endl;
+    a = b = std::move(d);
+    std::cout << "a" << std::endl;
+    a.print();
+    std::cout << "b" << std::endl;
+    b.print();
+    std::cout << "d" << std::endl;
+    d.print();
+
+    c = a == b;
     CHECK(c);
 }
 

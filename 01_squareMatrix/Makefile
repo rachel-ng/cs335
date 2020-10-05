@@ -20,3 +20,4 @@ test.o: test.cpp SquareMatrix.h
 clean:
 	rm *.o main tests test 
 
+
