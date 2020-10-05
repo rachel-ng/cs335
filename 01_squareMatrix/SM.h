@@ -112,6 +112,10 @@ SquareMatrix<T>& SquareMatrix<T>::operator=(const SquareMatrix& rhs) {
 // big 5 move operator  
 template <typename T>
 SquareMatrix<T>& SquareMatrix<T>::operator=(SquareMatrix&& rhs) {
+    if (this == &rhs) {
+        return *this;
+    }
+
     if (_arry != nullptr) {
         clear();
     }
