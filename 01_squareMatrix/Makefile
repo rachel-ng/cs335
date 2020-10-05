@@ -6,12 +6,17 @@ main: main.o SquareMatrix.o
 tests: tests.o SquareMatrix.o
 	g++ -o tests tests.o
 
-main.o: main.cpp SquareMatrix.h SquareMatrix.hxx
+test: test.o 
+	g++ -std=c++11 -Wall -g -fsanitize=address test.cpp -o test
 
-SquareMatrix.o: SquareMatrix.hxx SquareMatrix.h
+main.o: main.cpp SquareMatrix.h 
+
+SquareMatrix.o: SquareMatrix.h
 
 tests.o: tests.cpp SquareMatrix.h
 
+test.o: test.cpp SquareMatrix.h
+
 clean:
-	rm *.o main tests 
+	rm *.o main tests test 
 

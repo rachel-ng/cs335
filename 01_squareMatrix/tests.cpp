@@ -14,7 +14,7 @@ void fill (SquareMatrix<int>& m) {
     int size = m.size();
     for (int r = 0; r < size; r++) {
         for (int c = 0; c < size; c++) {
-            m.at(r,c) = r*size + c;
+            m.at(r,c) = 0;
         }
     }
 }
@@ -79,7 +79,7 @@ TEST_CASE("== / !="){
 
     for (int r = 0; r < 10; r++) {
         for (int c = 0; c < 10; c++) {
-            s.at(r,c) = r*100 + c;
+            s.at(r,c) = r*10 + c;
         }
     }
     
