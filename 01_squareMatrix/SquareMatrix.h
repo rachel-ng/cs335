@@ -138,7 +138,7 @@ bool SquareMatrix<T>::operator==(const SquareMatrix& rhs) {
 
     for (int r = 0; r < _size; r++) {
         for (int c = 0; c < _size; c++) {
-            if (this->_arry[r][c] != rhs._arry[r][c]) {
+            if (_arry[r][c] != rhs._arry[r][c]) {
                 return false;
             }
         }
@@ -156,7 +156,7 @@ bool SquareMatrix<T>::operator!=(const SquareMatrix& rhs) {
 
     for (int r = 0; r < _size; r++) {
         for (int c = 0; c < _size; c++) {
-            if (this->_arry[r][c] != rhs._arry[r][c]) {
+            if (_arry[r][c] != rhs._arry[r][c]) {
                 return true;
             }
         }
