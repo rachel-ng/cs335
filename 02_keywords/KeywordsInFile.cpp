@@ -1,14 +1,45 @@
 #include "KeywordsInFile.h"
 
+KeywordsInFile::KeywordsInFile(const std::string &fkeywords, const std::string &ftext) {
+    std::ifstream fkeys(fkeywords);
+    if (fkeys.fail()) {
+        throw(std::invalid_argument("'" + fkeywords + "' is not a valid file name"));
+    }
 
-KeywordsInFile::KeywordsInFile(std::string fkeywords, std::string ftext) {
-    std::ifstream fin(ftext);
-    if (fin.fail()) {
+    std::ifstream ftexts(ftext);
+    if (ftexts.fail()) {
         throw(std::invalid_argument("'" + ftext + "' is not a valid file name"));
     }
 
-    process_keys(fkeywords); 
+    process_keys(fkeys); 
+    process_text(ftexts); 
 
+
+}
+
+void KeywordsInFile::process_keys (std::ifstream &fin) {
+    std::string line, word;
+
+    while(std::getline(fin, line)) {
+        word = "";
+        for (int i = 0; i < line.length(); i++) {  // go through every character in the line 
+            if (isalpha(line[i])) { // add to word if it's a letter
+                word += line[i];
+            }
+
+            else if (word != "") { // add current word to the hash table if it isn't and reset the word
+                frequency.insert({word,0});
+                word = "";
+            }
+        }
+        if (word != "") {
+            frequency.insert({word,0});
+            word = "";
+        }
+    }
+}
+
+void KeywordsInFile::process_text (std::ifstream &fin) {
     std::string line, word;
     int ln = 1;
 
@@ -51,33 +82,6 @@ KeywordsInFile::KeywordsInFile(std::string fkeywords, std::string ftext) {
     }
 }
 
-void KeywordsInFile::process_keys (std::string fname) {
-    std::ifstream fin(fname);
-    if (fin.fail()) {
-        throw(std::invalid_argument("'" + fname + "' is not a valid file name"));
-    }
-
-    std::string line, word;
-
-    while(std::getline(fin, line)) {
-        word = "";
-        for (int i = 0; i < line.length(); i++) {  // go through every character in the line 
-            if (isalpha(line[i])) { // add to word if it's a letter
-                word += line[i];
-            }
-
-            else if (word != "") { // add current word to the hash table if it isn't and reset the word
-                frequency.insert({word,0});
-                word = "";
-            }
-        }
-        if (word != "") {
-            frequency.insert({word,0});
-            word = "";
-        }
-    }
-}
-
 std::ostream& operator<<(std::ostream& stream, const KeywordsInFile& target) {
     for( const auto& n : target.frequency) {
         if (isalpha(n.first.back())) {
@@ -88,7 +92,7 @@ std::ostream& operator<<(std::ostream& stream, const KeywordsInFile& target) {
     return stream;
 }
 
-bool KeywordsInFile::KeywordFound(std::string keyword) {
+bool KeywordsInFile::KeywordFound(const std::string &keyword) {
     if (frequency.count(keyword) > 0) {
         return frequency[keyword] > 0;
     } 
@@ -97,7 +101,7 @@ bool KeywordsInFile::KeywordFound(std::string keyword) {
     }
 }
 
-int KeywordsInFile::KeywordInLine(std::string keyword, int line_number) {
+int KeywordsInFile::KeywordInLine(const std::string &keyword, const int line_number) {
     if (frequency.count(keyword) == 0) {
         throw(std::invalid_argument("'" + keyword + "' is not a keyword"));
     }
@@ -112,7 +116,7 @@ int KeywordsInFile::KeywordInLine(std::string keyword, int line_number) {
     return 0;
 }
 
-int KeywordsInFile::TotalOccurrences(std::string keyword) {
+int KeywordsInFile::TotalOccurrences(const std::string &keyword) {
     if (frequency.count(keyword) > 0){
         return frequency[keyword];
     } 
@@ -122,7 +126,13 @@ int KeywordsInFile::TotalOccurrences(std::string keyword) {
     return 0;
 }
 
-std::string KeywordsInFile::key_line(const std::string &keyword, const int line) {
+std::string KeywordsInFile::key_line (const std::string &keyword, const int line) const {
     return keyword + " (" + std::to_string(line) + ")";
 }
+
+std::unordered_map<std::string, int> KeywordsInFile::data () const {
+    return frequency;
+}
+
+
 
