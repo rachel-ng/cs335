@@ -1,27 +1,17 @@
 #include "KeywordsInFile.h"
 
 KeywordsInFile::KeywordsInFile(const std::string &fkeywords, const std::string &ftext) {
-    std::ifstream fkeys(fkeywords);
-    if (fkeys.fail()) {
-        throw(std::invalid_argument("'" + fkeywords + "' is not a valid file name"));
-    }
-
-    std::ifstream ftexts(ftext);
-    if (ftexts.fail()) {
-        throw(std::invalid_argument("'" + ftext + "' is not a valid file name"));
-    }
-
-    process_keys(fkeys); 
-    process_text(ftexts); 
-
-    fkeys.close();
-    ftexts.close();
-
+    process_keys(fkeywords); 
+    process_text(ftext); 
 }
 
-void KeywordsInFile::process_keys (std::ifstream &fin) {
-    std::string line, word;
+void KeywordsInFile::process_keys (const std::string fname) {
+    std::ifstream fin(fname);
+    if (fin.fail()) {
+        throw(std::invalid_argument("'" + fname + "' is not a valid file name"));
+    }
 
+    std::string line, word;
     while(std::getline(fin, line)) {
         word = "";
         for (int i = 0; i < line.length(); i++) {  // go through every character in the line 
@@ -39,9 +29,14 @@ void KeywordsInFile::process_keys (std::ifstream &fin) {
             word = "";
         }
     }
+    fin.close();
 }
 
-void KeywordsInFile::process_text (std::ifstream &fin) {
+void KeywordsInFile::process_text (const std::string fname) {
+    std::ifstream fin(fname);
+    if (fin.fail()) {
+        throw(std::invalid_argument("'" + fname + "' is not a valid file name"));
+    }
     std::string line, word;
     int ln = 1;
 
@@ -82,6 +77,7 @@ void KeywordsInFile::process_text (std::ifstream &fin) {
         }
         ln++;
     }
+    fin.close();
 }
 
 std::ostream& operator<<(std::ostream& stream, const KeywordsInFile& target) {
@@ -96,11 +92,12 @@ std::ostream& operator<<(std::ostream& stream, const KeywordsInFile& target) {
 
 bool KeywordsInFile::KeywordFound(const std::string &keyword) {
     if (frequency.count(keyword) > 0) {
-        return frequency[keyword] > 0;
+        return frequency.at(keyword) > 0;
     } 
     else {
         throw(std::invalid_argument("'" + keyword + "' is not a keyword"));
     }
+    return false;
 }
 
 int KeywordsInFile::KeywordInLine(const std::string &keyword, const int line_number) {
@@ -113,14 +110,14 @@ int KeywordsInFile::KeywordInLine(const std::string &keyword, const int line_num
 
     std::string serialized = key_line(keyword,line_number);
     if (frequency.count(serialized) > 0) {
-        return frequency[serialized];
+        return frequency.at(serialized);
     }
     return 0;
 }
 
 int KeywordsInFile::TotalOccurrences(const std::string &keyword) {
     if (frequency.count(keyword) > 0){
-        return frequency[keyword];
+        return frequency.at(keyword);
     } 
     else {
         throw(std::invalid_argument("'" + keyword + "' is not a keyword"));
@@ -135,6 +132,3 @@ std::string KeywordsInFile::key_line (const std::string &keyword, const int line
 std::unordered_map<std::string, int> KeywordsInFile::data () const {
     return frequency;
 }
-
-
-

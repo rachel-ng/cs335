@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <unordered_map>
-#include "KeywordsInFile.cpp"
+#include "KeywordsInFile.h"
 
 int main() {
 
@@ -48,6 +48,33 @@ int main() {
     std::cout << "sunshine in line 6? " << f.KeywordInLine("sunshine",4) << std::endl;
     std::cout << "sunshine in line 6? " << f.KeywordInLine("sunshine",6) << std::endl;
     std::cout << "total occurrences? " << f.TotalOccurrences("sunshine") << std::endl;
+
+    std::cout << std::endl;
+
+    std::cout << "found sun? " << (f.KeywordFound("sun") ? "yes." : "no.") << std::endl;
+    try {
+        std::cout << "sun in line -10? " << f.KeywordInLine("sun",-10) << std::endl;
+    }
+    catch (const std::out_of_range& e) {
+        std::cout << "line out of range" << std::endl;
+    }
+    try {
+        std::cout << "sunin line 0? " << f.KeywordInLine("sun",0) << std::endl;
+    }
+    catch (const std::out_of_range& e) {
+        std::cout << "line out of range" << std::endl;
+    }
+    std::cout << "sun in line 1? " << f.KeywordInLine("sun",1) << std::endl;
+    std::cout << "sun in line 4? " << f.KeywordInLine("sun",4) << std::endl;
+    std::cout << "sun in line 6? " << f.KeywordInLine("sun",6) << std::endl;
+    std::cout << "sun in line 9? " << f.KeywordInLine("sun",9) << std::endl;
+    std::cout << "Sun in line 9? " << f.KeywordInLine("Sun",9) << std::endl;
+    std::cout << "sUn in line 9? " << f.KeywordInLine("sUn",9) << std::endl;
+    std::cout << "suN in line 9? " << f.KeywordInLine("suN",9) << std::endl;
+    std::cout << "SUn in line 9? " << f.KeywordInLine("SUn",9) << std::endl;
+    std::cout << "sUN in line 9? " << f.KeywordInLine("sUN",9) << std::endl;
+    std::cout << "SUN in line 9? " << f.KeywordInLine("SUN",9) << std::endl;
+    std::cout << "total occurrences? " << f.TotalOccurrences("sun") << std::endl;
 
 
 }

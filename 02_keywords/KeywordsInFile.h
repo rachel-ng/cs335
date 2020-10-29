@@ -9,8 +9,8 @@
 class KeywordsInFile{
 private:
     std::unordered_map<std::string, int> frequency;
-    void process_keys(std::ifstream &fin);
-    void process_text(std::ifstream &fin);
+    void process_keys(const std::string fname);
+    void process_text(const std::string fname);
 
     std::string key_line(const std::string &keyword, const int line) const;
 
@@ -19,8 +19,8 @@ public:
     KeywordsInFile()=delete;
 
     friend std::ostream& operator<<(std::ostream& stream, const KeywordsInFile& target);
-
     bool KeywordFound(const std::string &keyword);
+
     int KeywordInLine(const std::string &keyword, const int line_number);
     int TotalOccurrences(const std::string &keyword);
 
