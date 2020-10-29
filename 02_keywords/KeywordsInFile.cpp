@@ -13,6 +13,10 @@ KeywordsInFile::KeywordsInFile(const std::string &fkeywords, const std::string &
 
     process_keys(fkeys); 
     process_text(ftexts); 
+
+    fkeys.close();
+    ftexts.close();
+
 }
 
 void KeywordsInFile::process_keys (std::ifstream &fin) {
