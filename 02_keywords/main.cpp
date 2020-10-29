@@ -73,42 +73,42 @@ int main() {
     try {
         std::cout << "Sun in line 9? " << f.KeywordInLine("Sun",9) << std::endl;
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::invalid_argument& e) {
         std::cout << "line out of range" << std::endl;
     }
 
     try {
         std::cout << "sUn in line 9? " << f.KeywordInLine("sUn",9) << std::endl;
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::invalid_argument& e) {
         std::cout << "line out of range" << std::endl;
     }
 
     try {
         std::cout << "suN in line 9? " << f.KeywordInLine("suN",9) << std::endl;
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::invalid_argument& e) {
         std::cout << "line out of range" << std::endl;
     }
 
     try {
         std::cout << "SUn in line 9? " << f.KeywordInLine("SUn",9) << std::endl;
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::invalid_argument& e) {
         std::cout << "line out of range" << std::endl;
     }
 
     try {
         std::cout << "sUN in line 9? " << f.KeywordInLine("sUN",9) << std::endl;
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::invalid_argument& e) {
         std::cout << "line out of range" << std::endl;
     }
 
     try {
         std::cout << "SUN in line 9? " << f.KeywordInLine("SUN",9) << std::endl;
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::invalid_argument& e) {
         std::cout << "line out of range" << std::endl;
     }
 
