@@ -13,8 +13,6 @@ KeywordsInFile::KeywordsInFile(const std::string &fkeywords, const std::string &
 
     process_keys(fkeys); 
     process_text(ftexts); 
-
-
 }
 
 void KeywordsInFile::process_keys (std::ifstream &fin) {
@@ -83,7 +81,7 @@ void KeywordsInFile::process_text (std::ifstream &fin) {
 }
 
 std::ostream& operator<<(std::ostream& stream, const KeywordsInFile& target) {
-    for( const auto& n : target.frequency) {
+    for( const std::pair<std::string,int>& n : target.frequency) {
         if (isalpha(n.first.back())) {
             stream << n.first << ":\t" << n.second << std::endl;
         }
