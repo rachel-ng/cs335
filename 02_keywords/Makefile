@@ -1,4 +1,4 @@
-CXXFLAGS = -std=c++11
+CXXFLAGS = -std=c++11 -fsanitize=address
 
 main: KeywordsInFile.o main.o
 	g++ -o main KeywordsInFile.o main.o
