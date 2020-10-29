@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-    KeywordsInFile a("test.txt", "texts.txt");
+    KeywordsInFile a("g1.txt", "g2.txt");
     cout << a;
 }
 
