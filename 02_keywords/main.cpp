@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <unordered_map>
-#include "KeywordsInFile.h"
+#include "KeywordsInFile.cpp"
 
 int main() {
 
