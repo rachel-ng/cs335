@@ -98,19 +98,11 @@ int Field::Weight( int x1, int y1, int x2, int y2 ) {
     return start;
 }
 
-// return start - _sums[mny][mxx] - _sums[mxy][mnx];
-
 int Field::PathCost() {
     if (_cost.size() < 1 || _cost[0].size() < 1) {
         throw(std::out_of_range("size 0 is invalid: there is no path cost"));
     }
-    //std::cout << _sums.size() << std::endl;
-    //std::cout << _sums[0].size() << std::endl;
-    //std::cout << _sums[(_sums.size())-1][0] << std::endl; 
-    //std::cout << _sums[(_sums.size())-1][(_sums[0].size())-1] << std::endl; 
-    //std::cout << _sums[(_sums.size())-2][(_sums[0].size())-1] << std::endl; 
 
-    //return _sums[_sums.size()-1][0] + _sums[_sums.size()-1][_sums[0].size()-1] - _sums[_sums.size()-2][_sums[0].size()-1] - _nums[_sums.size()-1][0];
     return _cost[_sums.size()-1][_sums[0].size()-1];
 }
 
