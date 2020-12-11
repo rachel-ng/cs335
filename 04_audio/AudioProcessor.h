@@ -14,8 +14,6 @@ public:
     std::vector<short> StretchTwice(const std::vector<short> & audio);
     std::vector<short> Normalize(const std::vector<short> & audio, short normalizeTarget);
 
-
-
 };
 
 

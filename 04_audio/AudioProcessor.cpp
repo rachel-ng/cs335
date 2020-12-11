@@ -15,7 +15,7 @@ std::vector<short> AudioProcessor::Compress(const std::vector<short> & audio, sh
 
     for (int i = 0; i < audio.size(); i++) {
         if (std::abs(audio[i]) > threshold) {
-            processed.push_back((audio[i] >= 0 ? 1 : -1) * ((short) std::round(((float) ((std::abs(audio[i]) - threshold) / rate) + threshold))));
+            processed.push_back((audio[i] >= 0 ? 1 : -1) * ((short) std::round(((float) (((float) std::abs(audio[i]) - threshold) / rate) + threshold))));
         }
         else {
             processed.push_back(audio[i]);
