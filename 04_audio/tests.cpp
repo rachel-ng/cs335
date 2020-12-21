@@ -1,7 +1,6 @@
 #define BOOST_TEST_MODULE MyTest
 #include <boost/test/included/unit_test.hpp> 
 #include "AudioProcessor.h" 
-#include "AudioProcessor.cpp"
 #include <stdexcept>
 #include <vector>
 
