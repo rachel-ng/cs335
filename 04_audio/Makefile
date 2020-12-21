@@ -6,8 +6,8 @@ main: AudioProcessor.o main.o
 test: AudioProcessor.o test.o
 	g++ -std=c++17 -fsanitize=address -o test AudioProcessor.o test.o
 
-tests: tests.o
-	g++ -std=c++17 -fsanitize=address -o tests tests.o
+tests: AudioProcessor.o tests.o
+	g++ -std=c++17 -fsanitize=address -o tests AudioProcessor.o tests.o
 
 AudioProcessor.o: AudioProcessor.cpp AudioProcessor.h
 

@@ -1,5 +1,4 @@
 #include "AudioProcessor.h"
-#include <iostream>
 #include <stdexcept>
 #include <vector> 
 
@@ -164,6 +163,22 @@ int main () {
     std::cout << "\n" << std::endl;
 
     std::cout << print(outE) << std::endl;
+
+
+    std::vector<short> F{1};
+    std::vector<short> correctF{1};
+
+    std::vector<short> outF;
+    outF = processor.StretchTwice(F); 
+
+
+    std::cout << print(F) << std::endl;
+    std::cout << print(correctF) << std::endl;
+    std::cout << print(outF) << std::endl;
+
+
+
+
 }
 
 

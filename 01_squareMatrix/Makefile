@@ -1,23 +1,18 @@
-CXXFLAGS = -std=c++11
+CXXFLAGS = -std=c++17
 
-main: main.o SquareMatrix.o
-	g++ -o main main.o 
+test1: level_1_tests.o
+	g++ -o test1 level_1_tests.o
 
-tests: tests.o SquareMatrix.o
-	g++ -o tests tests.o
+test2: level_2_tests.o
+	g++ -o test2 level_2_tests.o
 
-test: test.o 
-	g++ -std=c++11 -Wall -g -fsanitize=address test.cpp -o test
+test3: level_3_tests.o
+	g++ -o test3 level_3_tests.o
 
-main.o: main.cpp SquareMatrix.h 
+test4: level_4_tests.o
+	g++ -o test4 level_4_tests.o
 
-SquareMatrix.o: SquareMatrix.h
-
-tests.o: tests.cpp SquareMatrix.h
-
-test.o: test.cpp SquareMatrix.h
-
-clean:
-	rm *.o main tests test 
-
-
+level_1_tests.o: level_1_tests.cpp catch_amalgamated.cpp GradingHelpers.h
+level_2_tests.o: level_2_tests.cpp catch_amalgamated.cpp GradingHelpers.h
+level_3_tests.o: level_3_tests.cpp catch_amalgamated.cpp GradingHelpers.h
+level_4_tests.o: level_4_tests.cpp catch_amalgamated.cpp GradingHelpers.h
